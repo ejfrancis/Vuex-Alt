@@ -8,7 +8,7 @@
     "url": "https://github.com/ejfrancis/Vuex-Alt.git"
   },
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "jest",
     "build": "rimraf dist/ && rollup src/index.js --format cjs --output dist/index.js",
     "prepublish": "npm run build"
   },
@@ -22,6 +22,7 @@
   "author": "Evan Francis",
   "license": "MIT",
   "devDependencies": {
+    "jest": "^20.0.4",
     "rimraf": "^2.6.1",
     "rollup": "^0.41.6"
   },
