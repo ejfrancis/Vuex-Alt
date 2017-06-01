@@ -1,11 +1,11 @@
 {
   "name": "vuex-alt",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "An alternative approach to Vuex helpers for accessing state, getters and actions that doesn't rely on string constants.",
   "main": "dist/index.js",
-  "repository" :{ 
-    "type" : "git",
-    "url" : "https://github.com/ejfrancis/Vuex-Alt.git"
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/ejfrancis/Vuex-Alt.git"
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
