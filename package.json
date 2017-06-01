@@ -10,7 +10,7 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "transpile": "mkdirp ./dist && babel src/index.js --out-file dist/index.js",
-    "bundle": "rimraf dist/ && rollup src/index.js --format cjs --output dist/bundle.js",
+    "bundle": "rimraf dist/ && rollup src/index.js --format cjs --output dist/index.js",
     "build": "npm run transpile && npm run bundle",
     "prepublish": "npm run bundle"
   },
