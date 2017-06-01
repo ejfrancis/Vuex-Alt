@@ -1,10 +1,14 @@
 {
-  "name": "vuex-actions-plugin",
+  "name": "vuex-alt",
   "version": "0.0.1",
-  "description": "Access Vuex actions on a Vue instance with this.$actions.foo().",
-  "main": "index.js",
+  "description": "An alternative approach to Vuex helpers for accessing state, getters and actions that doesn't rely on string constants.",
+  "main": "dist/index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "transpile": "mkdirp ./dist && babel src/index.js --out-file dist/index.js",
+    "bundle": "rimraf dist/ && rollup src/index.js --format cjs --output dist/bundle.js",
+    "build": "npm run transpile && npm run bundle",
+    "prepublish": "npm run bundle"
   },
   "keywords": [
     "Vue",
@@ -14,5 +18,16 @@
     "plugin"
   ],
   "author": "Evan Francis",
-  "license": "ISC"
+  "license": "MIT",
+  "devDependencies": {
+    "babel-cli": "^6.24.1",
+    "babel-preset-es2015": "^6.24.1",
+    "mkdirp": "^0.5.1",
+    "rimraf": "^2.6.1",
+    "rollup": "^0.41.6",
+    "transpile": "^2.3.0"
+  },
+  "dependencies": {
+    "camelcase": "^4.1.0"
+  }
 }
