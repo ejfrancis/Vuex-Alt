@@ -9,9 +9,8 @@
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "transpile": "mkdirp ./dist && babel src/index.js --out-file dist/index.js",
     "build": "rimraf dist/ && rollup src/index.js --format cjs --output dist/index.js",
-    "prepublish": "npm run bundle"
+    "prepublish": "npm run build"
   },
   "keywords": [
     "Vue",
@@ -23,7 +22,6 @@
   "author": "Evan Francis",
   "license": "MIT",
   "devDependencies": {
-    "mkdirp": "^0.5.1",
     "rimraf": "^2.6.1",
     "rollup": "^0.41.6"
   },
