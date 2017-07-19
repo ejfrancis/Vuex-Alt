@@ -10,7 +10,7 @@
   "scripts": {
     "test": "jest",
     "build": "npm run test && rimraf dist/ && rollup src/index.js --format cjs --output dist/index.js",
-    "prepush": "test"
+    "prepush": "npm run test"
   },
   "keywords": [
     "Vue",
