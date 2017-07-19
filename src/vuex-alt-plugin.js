@@ -19,9 +19,13 @@ const VuexAltPlugin = {
 
     Object.keys(actions).forEach((thisActionName) => {
       const thisActionFunctions = actions[thisActionName];
+      const thisActionFunction = thisActionFunctions[0];
 
       const actionFn = function(...args) {
-        thisActionFunctions.forEach((fn) => fn.apply(this, args));
+        if (!thisActionFunction) {
+          return;
+        }
+        return thisActionFunction.apply(this, args);
       };
       
       if (isNamespaced(thisActionName)) {

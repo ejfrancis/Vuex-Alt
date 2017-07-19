@@ -9,7 +9,7 @@ var camelCase = _interopDefault(require('camelcase'));
 const mapState = normalizeNamespace((namespace, states) => {
   const res = {};
   normalizeMap(states).forEach(({ key, val }) => {
-    res[key] = function mappedState () {
+    res[key] = function mappedState() {
       let state = this.$store.state;
       let getters = this.$store.getters;
       if (namespace) {
@@ -30,39 +30,39 @@ const mapState = normalizeNamespace((namespace, states) => {
   return res
 });
 
-const mapGetters = function(gettersMap) {
+const mapGetters = function (gettersMap) {
   const res = {};
   const keys = Object.keys(gettersMap);
-  for(let i = 0; i < keys.length; i++) {
+  for (let i = 0; i < keys.length; i++) {
     const thisGetterKey = keys[i];
     const thisGetterMappingFn = gettersMap[thisGetterKey];
-    res[thisGetterKey] = function(...args) {
+    res[thisGetterKey] = function (...args) {
       return thisGetterMappingFn(this._gettersNestedObject)();
     };
   }
   return res;
 };
 
-const mapActions = function(actionsMap) {
+const mapActions = function (actionsMap) {
   const res = {};
-  const keys = Object.keys(actionsMap); 
+  const keys = Object.keys(actionsMap);
   for (let i = 0; i < keys.length; i++) {
     const thisActionKey = keys[i];
     const thisActionMappingFn = actionsMap[thisActionKey];
     res[thisActionKey] = function (...args) {
-      thisActionMappingFn(this._actionsNestedObject)(...args);
+      return thisActionMappingFn(this._actionsNestedObject)(...args);
     };
   }
   return res;
 };
 
-function normalizeMap (map) {
+function normalizeMap(map) {
   return Array.isArray(map)
     ? map.map(key => ({ key, val: key }))
     : Object.keys(map).map(key => ({ key, val: map[key] }))
 }
 
-function normalizeNamespace (fn) {
+function normalizeNamespace(fn) {
   return (namespace, map) => {
     if (typeof namespace !== 'string') {
       map = namespace;
@@ -74,7 +74,7 @@ function normalizeNamespace (fn) {
   }
 }
 
-function getModuleByNamespace (store, helper, namespace) {
+function getModuleByNamespace(store, helper, namespace) {
   const module = store._modulesNamespaceMap[namespace];
   if (process.env.NODE_ENV !== 'production' && !module) {
     console.error(`[vuex] module namespace not found in ${helper}(): ${namespace}`);
@@ -101,9 +101,13 @@ const VuexAltPlugin = {
 
     Object.keys(actions).forEach((thisActionName) => {
       const thisActionFunctions = actions[thisActionName];
+      const thisActionFunction = thisActionFunctions[0];
 
       const actionFn = function(...args) {
-        thisActionFunctions.forEach((fn) => fn.apply(this, args));
+        if (!thisActionFunction) {
+          return;
+        }
+        return thisActionFunction.apply(this, args);
       };
       
       if (isNamespaced(thisActionName)) {
