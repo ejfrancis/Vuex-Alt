@@ -11,7 +11,7 @@
     "test": "jest",
     "build": "npm run test && npm run bundle",
     "bundle": "rimraf dist/ && rollup --config rollup.config.js && babel dist/index-not-transpiled.js --out-file dist/index.js && rimraf dist/index-not-transpiled.js",
-    "prepush": "npm run test"
+    "prepush": "npm run test && npm run build"
   },
   "keywords": [
     "Vue",
